@@ -9,7 +9,7 @@ int main(void)
 {
 	char command[100];
 	pid_t pid;
-	char *argv[] = {command, NULL};
+	char *argv[2];
 
 	while (1)
 	{
@@ -19,7 +19,6 @@ int main(void)
 			printf("\n");
 			exit(0);
 		}
-
 		command[strcspn(command, "\n")] = '\0';
 
 		if (strlen(command) == 0)
@@ -33,6 +32,8 @@ int main(void)
 		}
 		else if (pid == 0)
 		{
+			argv[0] = command;
+			argv[1] = NULL;
 
 			if (execve(command, argv, environ) == -1)
 			{
@@ -45,6 +46,5 @@ int main(void)
 			wait(NULL);
 		}
 	}
-
 	return (0);
 }
