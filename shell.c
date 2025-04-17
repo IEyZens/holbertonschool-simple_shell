@@ -33,6 +33,13 @@ int main(void)
 			argv[0] = input;
 			argv[1] = NULL;
 
+			if (access(input, X_OK) != 0)
+			{
+				write(2, "./shell: No such file or directory\n", 36);
+				exit(1);
+			}
+			execve(input, argv, environ);
+
 			if (execve(input, argv, environ) == -1)
 			{
 				write(2, "./shell: No such file or directory\n", 36);
