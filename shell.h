@@ -5,11 +5,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 extern char **environ;
 
-int main(void);
 int _strlen(char *str);
 char *display_prompt(void);
 
