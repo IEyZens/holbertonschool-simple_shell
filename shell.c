@@ -24,7 +24,7 @@ int main(void)
 		pid = fork();
 		if (pid == -1)
 		{
-			perror("fork failed");
+			write(2, "./shell: No such file or directory\n", 36);
 			free(input);
 			continue;
 		}
