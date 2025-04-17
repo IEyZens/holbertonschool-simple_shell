@@ -19,7 +19,7 @@ char *display_prompt(void)
 	if (read == -1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("\n");
+			write(1, "\n", 1);
 		free(command);
 		exit(0);
 	}
