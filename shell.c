@@ -14,7 +14,6 @@ int main(void)
 	while (1)
 	{
 		input = display_prompt();
-
 		if (!input || input[0] == '\0')
 		{
 			free(input);
@@ -28,29 +27,23 @@ int main(void)
 			free(input);
 			continue;
 		}
-		else if (pid == 0)
-		{
-			argv[0] = input;
-			argv[1] = NULL;
 
+		if (pid == 0)
+		{
 			if (access(input, X_OK) != 0)
 			{
 				write(2, "./shell: No such file or directory\n", 36);
 				exit(1);
 			}
+			argv[0] = input;
+			argv[1] = NULL;
 			execve(input, argv, environ);
+			write(2, "./shell: No such file or directory\n", 36);
+			exit(1);
+		}
 
-			if (execve(input, argv, environ) == -1)
-			{
-				write(2, "./shell: No such file or directory\n", 36);
-				exit(1);
-			}
-		}
-		else
-		{
-			wait(NULL);
-			free(input);
-		}
+		wait(NULL);
+		free(input);
 	}
 
 	return (0);
