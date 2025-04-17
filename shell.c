@@ -35,7 +35,7 @@ int main(void)
 
 			if (execve(input, argv, environ) == -1)
 			{
-				write(2, "command not found\n", 18);
+				write(2, "./shell: No such file or directory\n", 36);
 				exit(1);
 			}
 		}
