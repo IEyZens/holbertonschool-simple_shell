@@ -7,35 +7,33 @@
  */
 int main(void)
 {
-	char command[100];
 	pid_t pid;
 	char *argv[2];
+	char *input;
 
 	while (1)
 	{
-		printf("#cisfun$ ");
-		if (fgets(command, sizeof(command), stdin) == NULL)
-		{
-			printf("\n");
-			exit(0);
-		}
-		command[strcspn(command, "\n")] = '\0';
+		input = display_prompt();
 
-		if (strlen(command) == 0)
+		if (input[0] == 0)
+		{
+			free(input);
 			continue;
+		}
 
 		pid = fork();
 		if (pid == -1)
 		{
 			perror("fork failed");
+			free(input);
 			continue;
 		}
 		else if (pid == 0)
 		{
-			argv[0] = command;
+			argv[0] = input;
 			argv[1] = NULL;
 
-			if (execve(command, argv, environ) == -1)
+			if (execve(input, argv, environ) == -1)
 			{
 				perror("execve failed");
 				exit(1);
@@ -44,7 +42,9 @@ int main(void)
 		else
 		{
 			wait(NULL);
+			free(input);
 		}
 	}
+
 	return (0);
 }
