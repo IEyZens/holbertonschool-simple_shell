@@ -10,5 +10,7 @@
 extern char **environ;
 
 int main(void);
+int _strlen(char *str);
+char *display_prompt(void);
 
 #endif /* SHELL_H */
