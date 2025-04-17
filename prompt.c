@@ -24,7 +24,7 @@ char *display_prompt(void)
 		exit(0);
 	}
 
-	if (command[read - 1] == '\n')
+	if (read > 0 && command[read - 1] == '\n')
 		command[read - 1] = '\0';
 
 	return (command);
