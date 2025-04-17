@@ -15,7 +15,7 @@ int main(void)
 	{
 		input = display_prompt();
 
-		if (input[0] == 0)
+		if (!input || input[0] == '\0')
 		{
 			free(input);
 			continue;
@@ -35,7 +35,7 @@ int main(void)
 
 			if (execve(input, argv, environ) == -1)
 			{
-				perror("execve failed");
+				write(2, "command not found\n", 18);
 				exit(1);
 			}
 		}
