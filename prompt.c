@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * display_prompt - Affiche un symbole pour l'entrée d'une commande
+ *
+ * Return: Always char
+ */
 char *display_prompt(void)
 {
 	char *command = NULL;
