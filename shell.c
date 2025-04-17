@@ -7,43 +7,20 @@
  */
 int main(void)
 {
-	pid_t pid;
-	char *argv[2];
 	char *input;
 
 	while (1)
 	{
 		input = display_prompt();
+
 		if (!input || input[0] == '\0')
 		{
-			free(input);
+			free_and_null(&input);
 			continue;
 		}
 
-		pid = fork();
-		if (pid == -1)
-		{
-			write(2, "./shell: No such file or directory\n", 36);
-			free(input);
-			continue;
-		}
-
-		if (pid == 0)
-		{
-			if (access(input, X_OK) != 0)
-			{
-				write(2, "./shell: No such file or directory\n", 36);
-				exit(1);
-			}
-			argv[0] = input;
-			argv[1] = NULL;
-			execve(input, argv, environ);
-			write(2, "./shell: No such file or directory\n", 36);
-			exit(1);
-		}
-
-		wait(NULL);
-		free(input);
+		execute_command(input);
+		free_and_null(&input);
 	}
 
 	return (0);
