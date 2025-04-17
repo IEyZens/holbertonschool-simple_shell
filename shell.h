@@ -9,7 +9,10 @@
 
 extern char **environ;
 
-int _strlen(char *str);
 char *display_prompt(void);
+void execute_command(char *input);
+void print_error(void);
+void free_and_null(char **ptr);
+int _strlen(char *str);
 
 #endif /* SHELL_H */
