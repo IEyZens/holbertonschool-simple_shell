@@ -27,5 +27,6 @@ char *display_prompt(void)
 	if (command[read - 1] == '\n')
 		command[read - 1] = '\0';
 
-	return (command);
+	return command;
 }
+
