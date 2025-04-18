@@ -12,20 +12,24 @@ void execute_command(char *input)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("fork failed");
+		write(2, "./shell: No such file or directory\n", 36);
 		return;
 	}
 
 	if (pid == 0)
 	{
-		argv[0] = input;
-		argv[1] = NULL;
-
-		if (execve(input, argv, environ) == -1)
+		if (access(input, X_OK) != 0)
 		{
-			perror("./shell");
+			print_error();
 			exit(1);
 		}
+
+		argv[0] = input;
+		argv[1] = NULL;
+		execve(input, argv, environ);
+
+		write(2, "./shell: No such file or directory\n", 36);
+		return;
 	}
 	else
 	{
