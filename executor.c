@@ -29,7 +29,7 @@ void execute_command(char *input)
 		execve(input, argv, environ);
 
 		write(2, "./shell: No such file or directory\n", 36);
-		return;
+		exit(1);
 	}
 	else
 	{
