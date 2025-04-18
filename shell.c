@@ -9,8 +9,6 @@ int main(void)
 {
 	char *input;
 
-	setbuf(stdout, NULL);
-
 	while (1)
 	{
 		input = display_prompt();
