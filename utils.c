@@ -5,7 +5,7 @@
  */
 void print_error(void)
 {
-	perror("./shell");
+	write(2, "./shell: No such file or directory\n", 36);
 }
 
 /**
