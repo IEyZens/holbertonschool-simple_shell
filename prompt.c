@@ -9,22 +9,17 @@ char *display_prompt(void)
 {
 	char *command = NULL;
 	size_t len = 0;
-	ssize_t read;
-
-	if (isatty(STDIN_FILENO))
-		printf("#cisfun$ ");
-
+	int read;
+	
 	read = getline(&command, &len, stdin);
 
 	if (read == -1)
 	{
-		if (isatty(STDIN_FILENO))
-			write(1, "\n", 1);
 		free(command);
-		exit(0);
+		return (NULL);
 	}
 
-	if (read > 0 && command[read - 1] == '\n')
+	if (command[read - 1] == '\n')
 		command[read - 1] = '\0';
 
 	return (command);
