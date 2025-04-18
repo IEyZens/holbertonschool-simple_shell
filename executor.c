@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * execute_command - Il exécute toutes les commandes pour le shell.c
- * @input: est un char pointeur
+ * execute_command - Exécute une commande entrée
+ * @input: commande à exécuter
  */
 void execute_command(char *input)
 {
@@ -10,26 +10,23 @@ void execute_command(char *input)
 	char *argv[2];
 
 	pid = fork();
+
 	if (pid == -1)
 	{
-		write(2, "./shell: No such file or directory\n", 36);
+		perror("fork");
 		return;
 	}
 
 	if (pid == 0)
 	{
-		if (access(input, X_OK) != 0)
-		{
-			print_error();
-			exit(1);
-		}
-
 		argv[0] = input;
 		argv[1] = NULL;
-		execve(input, argv, environ);
 
-		write(2, "./shell: No such file or directory\n", 36);
-		return;
+		if (execve(input, argv, environ) == -1)
+		{
+			perror("./shell");
+			exit(1);
+		}
 	}
 	else
 	{
