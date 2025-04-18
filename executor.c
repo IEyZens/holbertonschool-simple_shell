@@ -4,7 +4,7 @@
  * execute_command - Il exécute toutes les commandes pour le shell.c
  * @input: est un char pointeur
  */
-int execute_command(char *input)
+void execute_command(char *input)
 {
 	pid_t pid;
 	char *argv[2];
@@ -13,7 +13,7 @@ int execute_command(char *input)
 	if (pid == -1)
 	{
 		write(2, "./shell: No such file or directory\n", 36);
-		return (0);
+		return;
 	}
 
 	if (pid == 0)
@@ -26,15 +26,17 @@ int execute_command(char *input)
 
 		argv[0] = input;
 		argv[1] = NULL;
-		execve(input, argv, environ);
 
-		write(2, "./shell: No such file or directory\n", 36);
-		exit(1);
+		if (execve(input, argv, environ) == -1)
+		{
+			perror("./shell");
+			exit(1);
+		}
+
+		return;
 	}
 	else
 	{
 		wait(NULL);
 	}
-
-	return (0);
 }
