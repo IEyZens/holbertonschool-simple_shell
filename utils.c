@@ -5,7 +5,7 @@
  */
 void print_error(void)
 {
-	write(2, "./shell: No such file or directory\n", 36);
+	perror("./shell");
 }
 
 /**
@@ -19,20 +19,4 @@ void free_and_null(char **ptr)
 		free(*ptr);
 		*ptr = NULL;
 	}
-}
-
-/**
- * _strlen - Compte le nombre de caractères
- * @str: est un char pointeur
- *
- * Return: Always 0
- */
-int _strlen(char *str)
-{
-	int len = 0;
-
-	while (str[len] != '\0')
-		len++;
-
-	return (len);
 }
