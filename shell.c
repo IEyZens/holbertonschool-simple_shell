@@ -8,21 +8,20 @@
 int main(void)
 {
 	char *input;
-	int status;
 
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
-			printf("#cisfun$ ");
 		input = display_prompt();
 
-		if (input == NULL)
-			break;
+		if (!input || input[0] == '\0')
+		{
+			free_and_null(&input);
+			continue;
+		}
 
-		status = execute_command(input);
-		if (status == 2)
-			exit(2);
+		execute_command(input);
+		free_and_null(&input);
 	}
 
-	return (status);
+	return (0);
 }
