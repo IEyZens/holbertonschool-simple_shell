@@ -10,7 +10,6 @@ void execute_command(char *input)
 	char *argv[2];
 
 	pid = fork();
-
 	if (pid == -1)
 	{
 		perror("fork");
@@ -25,7 +24,7 @@ void execute_command(char *input)
 		if (execve(input, argv, environ) == -1)
 		{
 			perror("./shell");
-			exit(1);
+			_exit(1);
 		}
 	}
 	else
