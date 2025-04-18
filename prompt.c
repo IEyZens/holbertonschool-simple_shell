@@ -12,19 +12,19 @@ char *display_prompt(void)
 	ssize_t read;
 
 	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "#cisfun$ ", 9);
+		printf("#cisfun$ ");
 
 	read = getline(&command, &len, stdin);
 
 	if (read == -1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "\n", 1);
+			write(1, "\n", 1);
 		free(command);
 		exit(0);
 	}
 
-	if (command[read - 1] == '\n')
+	if (read > 0 && command[read - 1] == '\n')
 		command[read - 1] = '\0';
 
 	return (command);
