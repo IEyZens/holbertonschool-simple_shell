@@ -1,13 +1,15 @@
 #include "shell.h"
 
 /**
- * main - Fonction qui produit une sortie selon la commande en entrée
+ * main - Boucle principale du shell
  *
- * Return: Toujours 0
+ * Return: 0 à la fin du programme
  */
 int main(void)
 {
 	char *input;
+
+	setbuf(stdout, NULL);
 
 	while (1)
 	{
