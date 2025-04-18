@@ -17,13 +17,14 @@ int main(void)
 
 		if (!input || input[0] == '\0')
 		{
-			free_and_null(&input);
+			free(input);
 			continue;
 		}
 
 		execute_command(input);
-		free_and_null(&input);
+		free(input);
 	}
 
 	return (0);
 }
+
