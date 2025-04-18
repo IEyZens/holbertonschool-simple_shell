@@ -18,9 +18,9 @@ char *display_prompt(void)
 
 	if (read == -1)
 	{
-		free(command);
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "\n", 1);
+		free(command);
 		exit(0);
 	}
 
