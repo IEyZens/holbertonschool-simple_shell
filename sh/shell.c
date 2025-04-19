@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * main - le code principal
+ *
+ * Return: Always 0
+ */
 int main(void)
 {
 	char *line = NULL;
