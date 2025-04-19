@@ -6,11 +6,14 @@
  */
 void execute_cmd(char *cmd)
 {
+	char *argv[2];
+
 	pid_t pid = fork();
 
 	if (pid == 0)
 	{
-		char *argv[] = {cmd, NULL};
+		argv[0] = cmd;
+		argv[1] = NULL;
 
 		if (execve(cmd, argv, environ) == -1)
 		{
