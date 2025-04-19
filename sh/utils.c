@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * trim_newline - remplace le \n final par \0

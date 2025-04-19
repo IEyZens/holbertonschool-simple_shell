@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * execute - fork et execve sur la commande entrée
