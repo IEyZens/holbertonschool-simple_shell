@@ -1,29 +1,19 @@
 #include "main.h"
 
 /**
- * parse_line - découpe la ligne en tokens
- * @line: ligne entrée par l'utilisateur
+ * read_line - lit une ligne depuis stdin
  *
- * Return: tableau de tokens
+ * Return: ligne allouée (à free), ou NULL si Ctrl+D
  */
-char **parse_line(char *line)
+char *read_line(void)
 {
-	char *token = NULL;
-	char **args = malloc(sizeof(char *) * 64);
-	int i = 0;
+	char *line = NULL;
+	size_t len = 0;
 
-	if (!args)
+	if (getline(&line, &len, stdin) == -1)
 	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
+		free(line);
+		return (NULL);
 	}
-
-	token = strtok(line, " \t\n");
-	while (token)
-	{
-		args[i++] = strdup(token);
-		token = strtok(NULL, " \t\n");
-	}
-	args[i] = NULL;
-	return (args);
+	return (line);
 }

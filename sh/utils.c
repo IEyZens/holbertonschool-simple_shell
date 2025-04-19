@@ -1,44 +1,33 @@
 #include "main.h"
 
 /**
- * prompt - affiche le prompt
+ * trim_newline - remplace le \n final par \0
+ * @line: ligne à modifier
+ *
+ * Return: pointeur modifié
  */
-void prompt(void)
+char *trim_newline(char *line)
 {
-	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, "#cisfun$ ", 8);
-}
+	size_t len = strlen(line);
 
-/**
- * read_line - lit une ligne depuis stdin
- * Return: ligne allouée
- */
-char *read_line(void)
-{
-	char *line = NULL;
-	size_t len = 0;
-
-	if (getline(&line, &len, stdin) == -1)
-	{
-		free(line);
-		return (NULL);
-	}
-
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
 	return (line);
 }
 
 /**
- * free_args - libère le tableau d’arguments
- * @args: arguments à libérer
+ * is_empty - vérifie si une ligne est vide (ex: juste entrée)
+ * @line: ligne à tester
+ *
+ * Return: 1 si vide, 0 sinon
  */
-void free_args(char **args)
+int is_empty(char *line)
 {
-	int i = 0;
-
-	if (!args)
-		return;
-
-	while (args[i])
-		free(args[i++]);
-	free(args);
+	while (*line)
+	{
+		if (*line != ' ' && *line != '\t')
+			return (0);
+		line++;
+	}
+	return (1);
 }

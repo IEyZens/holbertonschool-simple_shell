@@ -1,24 +1,29 @@
 #include "main.h"
 
 /**
- * execute - fork puis exec une commande
- * @args: tableau d'arguments
+ * execute - fork et execve sur la commande entrée
+ * @line: commande tapée
  */
-void execute(char **args)
+void execute(char *line)
 {
+	char *argv[2];
+
 	pid_t pid = fork();
 
 	if (pid == -1)
 	{
-		perror("fork");
+		perror("fork failed");
 		return;
 	}
 
 	if (pid == 0)
 	{
-		if (execvp(args[0], args) == -1)
+		argv[0] = line;
+		argv[1] = NULL;
+
+		if (execve(line, argv, environ) == -1)
 		{
-			perror(args[0]);
+			perror("./shell");
 			exit(EXIT_FAILURE);
 		}
 	}
