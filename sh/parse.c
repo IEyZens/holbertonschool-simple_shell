@@ -3,7 +3,7 @@
 /**
  * parse_line - découpe la ligne en tokens
  * @line: ligne entrée par l'utilisateur
- * 
+ *
  * Return: tableau de tokens
  */
 char **parse_line(char *line)

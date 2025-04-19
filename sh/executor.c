@@ -25,6 +25,7 @@ void execute(char **args)
 	else
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 	}
 }

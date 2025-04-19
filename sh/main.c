@@ -2,7 +2,7 @@
 
 /**
  * main - point d’entrée du shell
- * 
+ *
  * Return: 0 on success
  */
 int main(void)
