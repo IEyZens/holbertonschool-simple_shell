@@ -1,32 +1,30 @@
 #include "shell.h"
 
-/**
- * main - boucle principale du shell
- *
- * Return: 0
- */
 int main(void)
 {
 	char *line = NULL;
+	size_t len = 0;
+	ssize_t nread;
 
 	while (1)
 	{
-		prompt();
-		line = read_line();
-		if (line == NULL)
-			break;
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "#cisfun$ ", 9);
 
-		trim_newline(line);
-
-		if (is_empty(line))
+		nread = getline(&line, &len, stdin);
+		if (nread == -1)
 		{
-			free(line);
-			continue;
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
+			break;
 		}
 
-		execute(line);
-		free(line);
-	}
+		if (line[nread - 1] == '\n')
+			line[nread - 1] = '\0';
 
+		if (line[0] != '\0')
+			execute_cmd(line);
+	}
+	free(line);
 	return (0);
 }

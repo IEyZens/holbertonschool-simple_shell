@@ -9,11 +9,6 @@
 
 extern char **environ;
 
-/* fonctions */
-void prompt(void);
-char *read_line(void);
-char *trim_newline(char *line);
-int is_empty(char *line);
-void execute(char *line);
+void execute_cmd(char *cmd);
 
-#endif /* SHELL_H */
+#endif
