@@ -9,6 +9,24 @@ void print_error(void)
 }
 
 /**
+ * _strcmp - Permet de comparer deux chaînes de caractères, un par un,
+ * jusqu'à trouver une différence ou jusqu'à \0
+ * @s1: est un char pointeur constant
+ * @s2: est un char pointeur constant
+ *
+ * Return: Always 0
+ */
+int _strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
+/**
  * run_child_process - Exécuter la commande dans le processus enfant
  * @path: est un char pointeur
  * @argv: est un char double pointeur
