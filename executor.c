@@ -49,19 +49,20 @@ void execute_command(char *command)
 {
 	pid_t pid;
 	int status;
-	char **argv;
+	char **argv, *path;
 
-	if (command == NULL || *command == '\0')
+	if (!command || *command == '\0')
 		return;
 
 	argv = parse_args(command);
-	if (argv == NULL || argv[0] == NULL)
+	if (!argv || !argv[0])
 	{
 		free(argv);
 		return;
 	}
 
-	if (access(argv[0], X_OK) != 0)
+	path = resolve_path(argv[0]);
+	if (!path)
 	{
 		print_error();
 		free(argv);
@@ -72,19 +73,14 @@ void execute_command(char *command)
 	if (pid == -1)
 	{
 		write(STDERR_FILENO, "Error: fork failed\n", 19);
-		free(argv);
+		clean_and_return(path, argv, argv[0]);
 		return;
 	}
 
 	if (pid == 0)
-	{
-		execve(argv[0], argv, environ);
-		print_error();
-		exit(1);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		free(argv);
-	}
+		run_child_process(path, argv);
+
+	waitpid(pid, &status, 0);
+	clean_and_return(path, argv, argv[0]);
 }
+
