@@ -1,7 +1,10 @@
 #include "shell.h"
 
 /**
+ * parse_args - Permet d'exécuter des commandes avec arguments (ex : ls -l)
+ * @command: est un char pointeur
  *
+ * Return: Always char
  */
 char **parse_args(char *command)
 {
