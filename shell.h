@@ -19,6 +19,7 @@ char *_strdup(const char *str);
 int _strlen(const char *s);
 void _strcat(char *dest, const char *src);
 char *_strcpy(char *dest, const char *src);
+int _strcmp(const char *s1, const char *s2);
 char *get_path_env(void);
 char *build_full_path(char *dir, char *command);
 char *find_command_path(char *command);
