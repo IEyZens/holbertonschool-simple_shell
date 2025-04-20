@@ -13,7 +13,7 @@ extern char **environ;
 char *read_command(void);
 void execute_command(char *command);
 char **parse_args(char *command);
-void print_error(void);
+void print_error(char *command);
 int _strncmp(const char *s1, const char *s2, int n);
 char *_strdup(const char *str);
 int _strlen(const char *s);
