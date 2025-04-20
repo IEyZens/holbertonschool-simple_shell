@@ -26,5 +26,7 @@ char *find_command_path(char *command);
 void run_child_process(char *path, char **argv);
 void clean_and_return(char *path, char **argv, char *original);
 char *resolve_path(char *command);
+int handle_builtin(char *command);
+void print_env(void);
 
 #endif /* SHELL_H */
