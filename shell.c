@@ -8,7 +8,7 @@
 int main(void)
 {
 	char *command;
-	int b_status;
+	int i;
 
 	while (1)
 	{
@@ -21,15 +21,18 @@ int main(void)
 			break;
 		}
 
-		b_status = handle_builtin(command);
-
-		if (b_status == 1)
+		if (_strcmp(command, "exit") == 0)
 		{
 			free(command);
 			break;
 		}
-		else if (b_status == 0)
+		else if (_strcmp(command, "env") == 0)
 		{
+			for (i = 0; environ[i]; i++)
+			{
+				write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+				write(STDOUT_FILENO, "\n", 1);
+			}
 			free(command);
 			continue;
 		}
