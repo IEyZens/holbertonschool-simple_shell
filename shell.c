@@ -20,6 +20,12 @@ int main(void)
 			break;
 		}
 
+		if (_strcmp(command, "exit") == 0)
+		{
+			free(command);
+			break;
+		}
+
 		execute_command(command);
 		free(command);
 	}
