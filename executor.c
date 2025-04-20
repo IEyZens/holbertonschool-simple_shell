@@ -64,7 +64,7 @@ void execute_command(char *command)
 	path = resolve_path(argv[0]);
 	if (!path)
 	{
-		print_error();
+		print_error(argv[0]);
 		free(argv);
 		return;
 	}

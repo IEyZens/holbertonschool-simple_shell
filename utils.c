@@ -2,10 +2,13 @@
 
 /**
  * print_error - Imprime les erreurs
+ * @command: est un char pointeur
  */
-void print_error(void)
+void print_error(char *command)
 {
-	write(STDERR_FILENO, "./shell: No such file or directory\n", 35);
+	write(STDERR_FILENO, "./shell: ", 9);
+	write(STDERR_FILENO, command, _strlen(command));
+	write(STDERR_FILENO, ": No such file or directory\n", 29);
 }
 
 /**
@@ -34,7 +37,7 @@ int _strcmp(const char *s1, const char *s2)
 void run_child_process(char *path, char **argv)
 {
 	execve(path, argv, environ);
-	print_error();
+	print_error(argv[0]);
 	exit(1);
 }
 
