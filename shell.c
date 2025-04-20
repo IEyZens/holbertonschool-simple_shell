@@ -8,6 +8,7 @@
 int main(void)
 {
 	char *command;
+	int b_status;
 
 	while (1)
 	{
@@ -20,10 +21,17 @@ int main(void)
 			break;
 		}
 
-		if (_strcmp(command, "exit") == 0)
+		b_status = handle_builtin(command);
+
+		if (b_status == 1)
 		{
 			free(command);
 			break;
+		}
+		else if (b_status == 0)
+		{
+			free(command);
+			continue;
 		}
 
 		execute_command(command);
