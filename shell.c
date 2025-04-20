@@ -14,7 +14,7 @@ int main(void)
 	{
 		command = read_command();
 
-		if (command == NULL)
+		if (!command)
 		{
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
@@ -26,7 +26,8 @@ int main(void)
 			free(command);
 			break;
 		}
-		else if (_strcmp(command, "env") == 0)
+
+		if (_strcmp(command, "env") == 0)
 		{
 			for (i = 0; environ[i]; i++)
 			{
