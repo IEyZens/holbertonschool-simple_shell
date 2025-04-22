@@ -7,26 +7,8 @@
 void print_error(char *command)
 {
 	write(STDERR_FILENO, "./shell: ", 9);
-	write(STDERR_FILENO, command, _strlen(command));
+	write(STDERR_FILENO, command, strlen(command));
 	write(STDERR_FILENO, ": No such file or directory\n", 29);
-}
-
-/**
- * _strcmp - Permet de comparer deux chaînes de caractères, un par un,
- * jusqu'à trouver une différence ou jusqu'à \0
- * @s1: est un char pointeur constant
- * @s2: est un char pointeur constant
- *
- * Return: Always 0
- */
-int _strcmp(const char *s1, const char *s2)
-{
-	while (*s1 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return (*s1 - *s2);
 }
 
 /**

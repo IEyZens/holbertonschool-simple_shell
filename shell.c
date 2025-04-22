@@ -21,17 +21,17 @@ int main(void)
 			break;
 		}
 
-		if (_strcmp(command, "exit") == 0)
+		if (strcmp(command, "exit") == 0)
 		{
 			free(command);
 			break;
 		}
 
-		if (_strcmp(command, "env") == 0)
+		if (strcmp(command, "env") == 0)
 		{
 			for (i = 0; environ[i]; i++)
 			{
-				write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+				write(STDOUT_FILENO, environ[i], strlen(environ[i]));
 				write(STDOUT_FILENO, "\n", 1);
 			}
 			free(command);

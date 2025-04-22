@@ -12,7 +12,7 @@ char *get_path_env(void)
 
 	for (i = 0; environ[i]; i++)
 	{
-		if (_strncmp(environ[i], "PATH=", 5) == 0)
+		if (strncmp(environ[i], "PATH=", 5) == 0)
 			return (environ[i] + 5);
 	}
 	return (NULL);
@@ -27,16 +27,16 @@ char *get_path_env(void)
  */
 char *build_full_path(char *dir, char *command)
 {
-	int len1 = _strlen(dir);
-	int len2 = _strlen(command);
+	int len1 = strlen(dir);
+	int len2 = strlen(command);
 	char *path = malloc(len1 + len2 + 2);
 
 	if (!path)
 		return (NULL);
 
-	_strcpy(path, dir);
+	strcpy(path, dir);
 	path[len1] = '/';
-	_strcpy(path + len1 + 1, command);
+	strcpy(path + len1 + 1, command);
 	path[len1 + 1 + len2] = '\0';
 
 	return (path);
@@ -57,7 +57,7 @@ char *find_command_path(char *command)
 	if (!path)
 		return (NULL);
 
-	path_copy = _strdup(path);
+	path_copy = strdup(path);
 	if (!path_copy)
 		return (NULL);
 
