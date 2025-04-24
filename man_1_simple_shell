@@ -1,0 +1,64 @@
+.TH SHELL 1 "24 Avril 2025" "Version 1.0" "Manuel utilisateur"
+.SH NOM
+shell - Un shell UNIX minimal implémenté en C.
+
+.SH SYNOPSIS
+.B shell
+
+.SH DESCRIPTION
+.B shell
+est un interpréteur de commandes minimaliste implémenté en C. Il permet d'exécuter des commandes en ligne, de gérer les variables d'environnement, et de quitter grâce à des commandes internes.
+
+.SH FONCTIONNEMENT
+Le shell fonctionne en mode interactif et lit les commandes via l'entrée standard. Il propose une boucle infinie avec une invite personnalisée "#cisfun$ " et permet l'exécution des commandes suivantes :
+
+.TP
+.B exit
+Quitte le shell.
+
+.TP
+.B env
+Affiche la liste des variables d'environnement.
+
+.TP
+.B toute autre commande
+Est interprétée comme un appel à un programme externe. Le shell cherche la commande dans les répertoires listés dans la variable PATH et tente de l'exécuter dans un processus fils.
+
+.SH FONCTIONS INTERNES
+.TP
+.B read_command
+Lit une ligne de commande entrée par l'utilisateur.
+
+.TP
+.B parse_args
+Sépare une commande en arguments (similaire à l'effet de argc/argv).
+
+.TP
+.B execute_command
+Gère le processus de recherche et d'exécution de commande.
+
+.TP
+.B resolve_path
+Recherche le chemin absolu de la commande en utilisant PATH.
+
+.TP
+.B print_error
+Affiche une erreur si la commande est introuvable.
+
+.TP
+.B get_path_env, build_full_path, find_command_path
+Fonctions utilitaires pour manipuler la variable PATH et construire les chemins d'accès.
+
+.SH AUTEURS
+Projet Simple Shell écrit par Thomas Roncin. Basé sur la philosophie UNIX.
+
+.SH VOIR AUSSI
+.BR sh (1),
+.BR bash (1),
+.BR execve (2),
+.BR fork (2),
+.BR getenv (3)
+
+.SH BUGS
+Ce shell est minimal et ne supporte pas les opérateurs logiques, la redirection, les tubes, ou les scripts complexes.
+
