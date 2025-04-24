@@ -165,10 +165,10 @@ flowchart TD
 ```
 
 ## MAN PAGE
-Man page de la commande exit : http://manpagesfr.free.fr/man/man3/exit.3.html
-Man page de la commande ls : https://www.man-linux-magique.net/man1/ls.html
-Man page de la commande pwd : https://www.man-linux-magique.net/man1/pwd.html
-Man page de la commande env : http://manpagesfr.free.fr/man/man1/env.1.html
+- Man page de la commande exit : http://manpagesfr.free.fr/man/man3/exit.3.html
+- Man page de la commande ls : https://www.man-linux-magique.net/man1/ls.html
+- Man page de la commande pwd : https://www.man-linux-magique.net/man1/pwd.html
+- Man page de la commande env : http://manpagesfr.free.fr/man/man1/env.1.html
 
 ## AUTEURS
 Thomas Roncin - https://github.com/IEyZens
